@@ -2,11 +2,18 @@ package com.model;
 
 public class Item {
 
-	private Long itemId;
+	private Integer itemId;
 	private double itemPrice;
 	private int stock;
 	private String itemName;
 	private String itemDescription;
+	
+	//test constructor
+	public Item(Integer itemId,String itemName) {
+		super();
+		this.itemId = itemId;
+		this.itemName = itemName;
+	}
 	
 	public Item(double itemPrice, int stock, String itemName, String itemDescription) {
 		super();
@@ -15,12 +22,21 @@ public class Item {
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
 	}
+	
+	public Item(Integer itemId, double itemPrice, int stock, String itemName, String itemDescription) {
+		super();
+		this.itemId = itemId;
+		this.itemPrice = itemPrice;
+		this.stock = stock;
+		this.itemName = itemName;
+		this.itemDescription = itemDescription;
+	}
 
-	public Long getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(Long itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 

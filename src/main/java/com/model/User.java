@@ -1,31 +1,44 @@
 package com.model;
 
+import java.util.List;
+import java.util.UUID;
+
 public class User {
 
-	private Long userId;
+	private String userId;
 	private String firstName;
 	private String lastName;
-	private String userName;
+	private String email;
 	private String password;
 	private String zipCode;
+	private String dateOfBirth;
+	private List<String> ordersList;
 	
-	
-	public User(String firstName, String lastName, String userName, String password, String zipCode) {
+	//testing purposes
+	public User(String firstName, String lastName) {
 		super();
+		this.userId = UUID.randomUUID().toString();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.userName = userName;
+	}
+	
+	public User(String firstName, String lastName, String userName, String password, String zipCode, String dateOfBirth) {
+		super();
+		this.userId = UUID.randomUUID().toString();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = userName;
 		this.password = password;
 		this.zipCode = zipCode;
+		this.dateOfBirth = dateOfBirth;
 	}
-
-
-	public Long getUserId() {
+	
+	public String getUserId() {
 		return userId;
 	}
 
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -50,13 +63,13 @@ public class User {
 	}
 
 
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String userName) {
+		this.email = userName;
 	}
 
 
@@ -80,6 +93,22 @@ public class User {
 	}
 
 
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public List<String> getOrdersList() {
+		return ordersList;
+	}
+
+	public void setOrdersList(List<String> ordersList) {
+		this.ordersList = ordersList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,7 +117,7 @@ public class User {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
@@ -123,10 +152,10 @@ public class User {
 				return false;
 		} else if (!userId.equals(other.userId))
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (email == null) {
+			if (other.email != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!email.equals(other.email))
 			return false;
 		if (zipCode == null) {
 			if (other.zipCode != null)
