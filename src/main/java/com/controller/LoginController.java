@@ -1,6 +1,10 @@
 package com.controller;
 
+import com.database.MongoConnector;
+
 public class LoginController {
+	
+	MongoConnector mongoConnection = MongoConnector.getInstance();
 	
 	//database connection for user
 	
