@@ -5,20 +5,19 @@ import java.util.UUID;
 
 public class Order {
 	
-	
-	private String orderId;
-	private enum OrderStatus{
+	static public enum OrderStatus{
 		PREPARING, DISPATCHED, DELIVERED
 	}
+	private String orderId;
 	private OrderStatus orderStatus;
 	private String orderDate;
 	//Each order has an associated user object, allowing verification of user via zipcode/dob
 	private User user;
-	private List<Integer> itemList;
+	private List<Item> itemList;
 	private double orderTotal;
 	
 	//test Constructor
-	public Order(User user, List<Integer> itemList2) {
+	public Order(User user, List<Item> itemList2) {
 		super();
 		//set a random orderID upon order creation (can be changed later for easier order navigation)
 		this.orderId = UUID.randomUUID().toString();
@@ -26,7 +25,7 @@ public class Order {
 		this.itemList = itemList2;
 	}
 	
-	public Order(String orderDate, User user, List<Integer> itemList) {
+	public Order(String orderDate, User user, List<Item> itemList) {
 		super();
 		//set a random orderID upon order creation (can be changed later for easier order navigation)
 		this.orderId = UUID.randomUUID().toString();
@@ -55,11 +54,11 @@ public class Order {
 		return user;
 	}
 
-	public List<Integer> getItemList() {
+	public List<Item> getItemList() {
 		return itemList;
 	}
 
-	public void setItemList(List<Integer> itemList) {
+	public void setItemList(List<Item> itemList) {
 		this.itemList = itemList;
 	}
 

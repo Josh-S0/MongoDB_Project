@@ -1,6 +1,8 @@
 package com.controller;
 
 public class OrderController {
+	
+	//database connection for orders
 
 	// - Action for logged in users to see their previous orders
     // Action to confirm an order (navigate to this action from the home controller)
