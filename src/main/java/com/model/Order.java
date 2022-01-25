@@ -12,25 +12,25 @@ public class Order {
 	private OrderStatus orderStatus;
 	private String orderDate;
 	//Each order has an associated user object, allowing verification of user via zipcode/dob
-	private User user;
-	private List<Item> itemList;
+	private String userId;
+	private List<Integer> itemList;
 	private double orderTotal;
 	
 	//test Constructor
-	public Order(User user, List<Item> itemList2) {
+	public Order(String userId, List<Integer> itemList2) {
 		super();
 		//set a random orderID upon order creation (can be changed later for easier order navigation)
 		this.orderId = UUID.randomUUID().toString();
-		this.user = user;
+		this.userId = userId;
 		this.itemList = itemList2;
 	}
 	
-	public Order(String orderDate, User user, List<Item> itemList) {
+	public Order(String orderDate, String userId, List<Integer> itemList) {
 		super();
 		//set a random orderID upon order creation (can be changed later for easier order navigation)
 		this.orderId = UUID.randomUUID().toString();
 		this.orderDate = orderDate;
-		this.user = user;
+		this.userId = userId;
 		this.itemList = itemList;
 	}
 
@@ -50,15 +50,15 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	public User getUser() {
-		return user;
+	public String getUserId() {
+		return userId;
 	}
 
-	public List<Item> getItemList() {
+	public List<Integer> getItemList() {
 		return itemList;
 	}
 
-	public void setItemList(List<Item> itemList) {
+	public void setItemList(List<Integer> itemList) {
 		this.itemList = itemList;
 	}
 
@@ -70,7 +70,17 @@ public class Order {
 		this.orderTotal = orderTotal;
 	}
 
-	public OrderStatus getOrderStatus() {
+	public String getOrderStatus() {
+		String orderStatus = "";
+		switch(this.orderStatus) {
+		case PREPARING:
+			orderStatus = "PREPARING";
+		case DISPATCHED:
+			orderStatus = "DISPATCHED";
+		case DELIVERED:
+			orderStatus = "DELIVERED";
+		}
+		
 		return orderStatus;
 	}
 

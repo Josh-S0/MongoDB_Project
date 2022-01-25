@@ -24,23 +24,34 @@ public class ModelTest {
 	Item item2 = new Item(1, "Butter");
 	Item item3 = new Item(2, "Sugar");
 	
-	List<Item> itemList = Arrays.asList(item1,item2,item3);
-	List<Item> itemList2 = Arrays.asList(item1,item3);
+	List<Integer> itemList = Arrays.asList(item1.getItemId(),item2.getItemId(),item3.getItemId());
+	List<Integer> itemList2 = Arrays.asList(item1.getItemId(),item3.getItemId());
 	
+	Order order1;
+	List<Order> orderList = Arrays.asList(order1);
 	
 	@Test
 	@Before
 	public void orderCreation(){
-		Order order1 = new Order(user1, itemList2);
+		order1 = new Order(user1.getUserId(), itemList2);
 		assertNotNull(order1);
-		assertEquals(order1.getUser().getUserId(), user1.getUserId());
+		assertEquals(order1.getUserId(), user1.getUserId());
 		order1.setOrderStatus(OrderStatus.DELIVERED);
 	}
 	
 	@Test
 	public void orderRetrieval() {
 		
-		
+		assertEquals(order1.getOrderStatus(), "DELIVERED");
+		assertEquals(order1.getItemList().get(1).intValue(), 2);
 	}
 	
+	//testing adding an order to a user for previous order function
+	@Test
+	public void addOrderToUser() {
+		
+		user1.getOrdersList().add(order1.getOrderId());
+		assertEquals(user1.getOrdersList().get(0), order1.getOrderId());
+	
+	}
 }

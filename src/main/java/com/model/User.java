@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ public class User {
 	private String password;
 	private String zipCode;
 	private String dateOfBirth;
-	private List<String> ordersList;
+	private List<String> ordersList = new ArrayList<String>();
 	
 	//testing purposes
 	public User(String firstName, String lastName) {
