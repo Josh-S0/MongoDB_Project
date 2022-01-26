@@ -14,5 +14,17 @@ public final class ItemAdapter {
 		 				 .append("stockCount", item.getStock());
 	}
 	
+	public static final Item toObject(DBObject dbObject) {
+		
+		Integer itemId = (Integer) dbObject.get("_id");
+		String itemName = (String) dbObject.get("itemName");
+		String itemDesc = (String) dbObject.get("itemDesc");
+		double itemPrice = Double.valueOf(dbObject.get("itemPrice").toString());
+		int stock = (Integer) dbObject.get("stockCount");
+		Item item = new Item(itemId, itemPrice, stock, itemName, itemDesc);
+
+		return item;
+	}
+	
 
 }

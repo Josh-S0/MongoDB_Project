@@ -25,10 +25,21 @@ public class Order {
 		this.itemList = itemList;
 	}
 	
+	//creation constructor
 	public Order(String orderDate, String userId, List<Integer> itemList) {
 		super();
 		//set a random orderID upon order creation (can be changed later for easier order navigation)
 		this.orderId = UUID.randomUUID().toString();
+		this.orderStatus = OrderStatus.PREPARING;
+		this.orderDate = orderDate;
+		this.userId = userId;
+		this.itemList = itemList;
+	}
+	//retrieval constructor
+	public Order(String orderId, String orderDate, String orderStatus, String userId, List<Integer> itemList) {
+		super();
+		this.orderId = orderId;
+		setOrderStatus(orderStatus);
 		this.orderDate = orderDate;
 		this.userId = userId;
 		this.itemList = itemList;
@@ -87,8 +98,18 @@ public class Order {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
+	public void setOrderStatus(String orderStatus) {
+		
+		if(orderStatus.equalsIgnoreCase("preparing")) {
+			this.orderStatus = OrderStatus.PREPARING;
+		}
+		if(orderStatus.equalsIgnoreCase("dispatched")) {
+			this.orderStatus = OrderStatus.DISPATCHED;
+		}
+		if(orderStatus.equalsIgnoreCase("delivered")) {
+			this.orderStatus = OrderStatus.DELIVERED;
+		}
+		
 	}
 	
 	
