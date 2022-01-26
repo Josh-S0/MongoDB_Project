@@ -23,12 +23,12 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public User(String firstName, String lastName, String userName, String password, String zipCode, String dateOfBirth) {
+	public User(String firstName, String lastName, String email, String password, String zipCode, String dateOfBirth) {
 		super();
 		this.userId = UUID.randomUUID().toString();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = userName;
+		this.email = email;
 		this.password = password;
 		this.zipCode = zipCode;
 		this.dateOfBirth = dateOfBirth;

@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Order {
 	
-	static public enum OrderStatus{
+	public static enum OrderStatus{
 		PREPARING, DISPATCHED, DELIVERED
 	}
 	private String orderId;
@@ -17,12 +17,12 @@ public class Order {
 	private double orderTotal;
 	
 	//test Constructor
-	public Order(String userId, List<Integer> itemList2) {
+	public Order(String userId, List<Integer> itemList) {
 		super();
 		//set a random orderID upon order creation (can be changed later for easier order navigation)
 		this.orderId = UUID.randomUUID().toString();
 		this.userId = userId;
-		this.itemList = itemList2;
+		this.itemList = itemList;
 	}
 	
 	public Order(String orderDate, String userId, List<Integer> itemList) {
@@ -75,10 +75,13 @@ public class Order {
 		switch(this.orderStatus) {
 		case PREPARING:
 			orderStatus = "PREPARING";
+			break;
 		case DISPATCHED:
 			orderStatus = "DISPATCHED";
+			break;
 		case DELIVERED:
 			orderStatus = "DELIVERED";
+			break;
 		}
 		
 		return orderStatus;
