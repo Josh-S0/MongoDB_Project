@@ -36,7 +36,7 @@ public class ModelTest {
 		order1 = new Order(user1.getUserId(), itemList2);
 		assertNotNull(order1);
 		assertEquals(order1.getUserId(), user1.getUserId());
-		order1.setOrderStatus(OrderStatus.DELIVERED);
+		order1.setOrderStatus("delivered");
 	}
 	
 	@Test
