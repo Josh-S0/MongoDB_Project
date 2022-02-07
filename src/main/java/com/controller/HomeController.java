@@ -1,34 +1,40 @@
 package com.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import com.database.ItemAdapter;
-import com.database.MongoConnector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.model.Item;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import com.repository.ItemRepository;
 
+@RestController
+@RequestMapping("/items")
 public class HomeController {
 	
-	//database connection for items
-	DBCollection itemCollection = MongoConnector.getInstance().getDatabase().getCollection("Items");
-
-	//Action to load list of item users can order
-	public List<Item> getAllItems() {
-		
-		List<Item> itemList = new ArrayList<Item>();
-		DBCursor itemCursor = itemCollection.find();
-		while(itemCursor.hasNext()) {
-			DBObject itemObj = itemCursor.next();
-			Item item = ItemAdapter.toObject(itemObj);
-			itemList.add(item);
-		}
-		return itemList;
-		
+	@Autowired
+	private ItemRepository itemRepository;
+	
+	@PostMapping("/add")
+	public  void addItem(@RequestBody final Item item){
+		itemRepository.save(item);
 	}
-	//
 	
+	@GetMapping("/all")
+	public List<Item> getAll(){
+		return itemRepository.findAll();
+	}
 	
+	@GetMapping("/{itemId}")
+	public Optional<Item> findById(@PathVariable final String itemId) {
+		return itemRepository.findById(itemId);
+	}
+	
+
 }

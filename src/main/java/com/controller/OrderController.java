@@ -1,27 +1,74 @@
 package com.controller;
 
-import com.database.MongoConnector;
-import com.mongodb.DBCollection;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.model.Item;
+import com.model.Order;
+import com.model.User;
+import com.repository.OrderRepository;
+
+@RestController
+@RequestMapping("/orders")
 public class OrderController {
-	
-	//database connection for orders
-	
-	DBCollection userCollection = MongoConnector.getInstance().getDatabase().getCollection("Users");
-	DBCollection itemCollection = MongoConnector.getInstance().getDatabase().getCollection("Items");
-	DBCollection orderCollection = MongoConnector.getInstance().getDatabase().getCollection("Orders");
 
+	@Autowired
+	private OrderRepository orderRepository;
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+	private  LocalDate localDate = LocalDate.now();
+	private String currentDate = dtf.format(localDate);
+	
+	private User user;
+	
+	public OrderController(User user) {
+		this.user = user;
+	}
+	//previous orders
+	public List<Order> getOrders(){
+		return this.user.getOrdersList();
+	}
+	
+	//create order
+	public void confirmOrder(List<Item> itemList) {
+			Order newOrder = new Order(this.user.getUserId(), itemList, calculateOrderTotal(itemList));
+			newOrder.setOrderId(UUID.randomUUID().toString());
+			newOrder.setOrderDate(currentDate);
+			orderRepository.save(newOrder);
+	}
+	
 
-	// - Action for logged in users to see their previous orders
-    // Action to confirm an order (navigate to this action from the home controller)
+	@GetMapping("/{orderId}")
+	public Optional<Order> getOrder(@PathVariable final String orderId){
+		return orderRepository.findById(orderId);
+	}
+	
+	private BigDecimal calculateOrderTotal(List<Item>itemList) {
+		BigDecimal orderTotal = null;
+		for(Item item: itemList) {
+				orderTotal = orderTotal.add(item.getItemPrice());
+		}
+		return orderTotal;
+	}
 	
 	
-	
-	// Add to cart method - adds items to an itemList
-	// Method calculateOrderTotal
-	// Method updateOrderStatus
-	// Method to create an order, - requires userID and list of items - includes 
-	// Method to add order to user.orderslist
-	// Method to retrieve orderslist from a user
+	//test methods
+	@PostMapping("/add")
+	public void addOrder(@RequestBody final Order order) {
+			order.setOrderId(UUID.randomUUID().toString());
+			order.setOrderDate(currentDate);
+			orderRepository.save(order);
+	}
 	
 }

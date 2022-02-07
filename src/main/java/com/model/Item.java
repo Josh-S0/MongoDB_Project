@@ -1,78 +1,75 @@
 package com.model;
 
+import java.math.BigDecimal;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Items")
 public class Item {
 
-	private Integer itemId;
-	private double itemPrice;
-	private int stock;
+	@Id
+	private String id;
+	@Indexed(direction = IndexDirection.ASCENDING)
+	private BigDecimal itemPrice;
 	private String itemName;
-	private String itemDescription;
+	private String url;
+	private int stock;
 	
-	//test constructor
-	public Item(Integer itemId,String itemName) {
-		super();
-		this.itemId = itemId;
-		this.itemName = itemName;
-	}
 	
-	public Item(double itemPrice, int stock, String itemName, String itemDescription) {
+	/**
+	 * @param id
+	 * @param itemPrice
+	 * @param itemName
+	 * @param url
+	 * @param stock
+	 */
+	public Item(String id, BigDecimal itemPrice, String itemName, String url, int stock) {
 		super();
+		this.id = id;
 		this.itemPrice = itemPrice;
+		this.itemName = itemName;
+		this.url = url;
 		this.stock = stock;
-		this.itemName = itemName;
-		this.itemDescription = itemDescription;
 	}
+
 	
-	public Item(Integer itemId, double itemPrice, int stock, String itemName, String itemDescription) {
-		super();
-		this.itemId = itemId;
-		this.itemPrice = itemPrice;
-		this.stock = stock;
-		this.itemName = itemName;
-		this.itemDescription = itemDescription;
-	}
-
-	public Integer getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
-
-	public double getItemPrice() {
-		return itemPrice;
-	}
-
-	public void setItemPrice(double itemPrice) {
-		this.itemPrice = itemPrice;
-	}
-
 	public int getStock() {
 		return stock;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public String getItemId() {
+		return id;
+	}
+	public BigDecimal getItemPrice() {
+		return itemPrice;
 	}
 
 	public String getItemName() {
 		return itemName;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setItemId(String id) {
+		this.id = id;
+	}
+	public void setItemPrice(BigDecimal itemPrice) {
+		this.itemPrice = itemPrice;
+	}
 
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-
-	public String getItemDescription() {
-		return itemDescription;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
-	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
-	}
-	
-	
 	
 	
 }
