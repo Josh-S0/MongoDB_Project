@@ -1,6 +1,5 @@
 package com.controller;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.User;
@@ -39,7 +36,8 @@ public class LoginController {
 		return userRepository.findById(userId);
 	}
 
-	public List<User> getUserByEmail (String email) {
+	
+	public User getUserByEmail (String email) {
 	    return userRepository.findByEmail(email);
 	}
 	
@@ -47,6 +45,4 @@ public class LoginController {
 		return passwordEncoder.matches(password, user.getPassword());
 	}
 	
-	
-
 }

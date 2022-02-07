@@ -1,12 +1,11 @@
 package com.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
+@Component
 @Document(collection = "Users")
 public class User {
 
@@ -18,14 +17,11 @@ public class User {
 	private String password;
 	private String zipCode;
 	private String dateOfBirth;
-	private List<String> ordersList;
+	private List<Order> ordersList;
 	
-	protected User()
-	{
-		this.ordersList = new ArrayList<>();
+	public User() {
 	}
-	
-
+		
 	/**
 	 * @param userId
 	 * @param firstName
@@ -37,7 +33,7 @@ public class User {
 	 * @param ordersList
 	 */
 	public User(String userId, String firstName, String lastName, String email, String password, String zipCode,
-			String dateOfBirth, List<String> ordersList) {
+			String dateOfBirth, List<Order> ordersList) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -118,11 +114,11 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<String> getOrdersList() {
+	public List<Order> getOrdersList() {
 		return ordersList;
 	}
 
-	public void setOrdersList(List<String> ordersList) {
+	public void setOrdersList(List<Order> ordersList) {
 		this.ordersList = ordersList;
 	}
 

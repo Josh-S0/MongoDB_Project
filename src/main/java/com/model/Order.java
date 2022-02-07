@@ -25,9 +25,8 @@ public class Order {
 		this.itemList = new ArrayList<>();
 	}
 
-	public Order(String orderDate, String userId, List<Item> itemList, BigDecimal orderTotal) {
+	public Order(String userId, List<Item> itemList, BigDecimal orderTotal) {
 		super();
-		this.orderDate = orderDate;
 		this.userId = userId;
 		this.itemList = itemList;
 		this.orderTotal = orderTotal;
